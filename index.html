@@ -171,8 +171,8 @@
         // --- CONTROLES DE CAPA ---
         var overlayMaps = {
             "Centros Distribución": centroLayer,
-            "Cobertura General": layerGroup,
-            "Densidad (Buscable)": layerGroup2
+            "Cobertura SameDay": layerGroup,
+            "Densidad de entregas Parcel": layerGroup2
         };
         L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
         layerGroup2.addTo(map); // Añadida por defecto
@@ -216,3 +216,4 @@
     </script>
 </body>
 </html>
+
