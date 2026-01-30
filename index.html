@@ -82,6 +82,8 @@
             <hr>
             <strong>Posible expansión de SameDay</strong><br>
             <div><span class="legend-circle" style="background-color:#5c0397;"></span>Expansión</div>
+            <strong>Posible expansión de SameDay (2do Bloque)</strong><br>
+            <div><span class="legend-circle" style="background-color:#2c84f7;"></span>Expansión 2do Bloque</div>
         </div>
     </div>
 
@@ -93,6 +95,8 @@
     <script src="puntos_bodegas_copia.js"></script>
     <script src="poligonos_zonas_v97_dens_simp_copia.js"></script>
     <script src="expansion_smd_copia.js"></script>
+    <script src="expansion_smd2_copia.js"></script>
+    
 
     <script>
         // Inicialización del Mapa
@@ -197,12 +201,40 @@ var layerGroup3 = L.geoJSON(expansion, {
             }
         });
 
+
+
+        ////CUARTA CAPA EXPASIÓN 2DO BLOQUE: 
+
+         function colorSame2(service){
+            switch (service) {
+                case "SPT": return "#2c84f7";
+                default: return "#2c84f7";
+            }
+
+            
+        }
+
+  
+
+var layerGroup4 = L.geoJSON(expansion2, {
+            style: function(f) {
+                return { fillColor: colorSame2(f.properties.service), weight: 1.5, color: 'white', fillOpacity: 0.7 };
+            },
+            onEachFeature: function(f, l) {
+                l.bindPopup('<b>Estación:</b> ' + f.properties.station + 
+                           '<br><b>Densidad:</b> ' + f.properties.densidad + ' paq/km²' +
+                           '<br><b>Zonificación:</b> ' + f.properties.ZONAS_P_RE);
+            }
+        });
+
+
         // --- CONTROLES DE CAPA ---
         var overlayMaps = {
             "Centros Distribución": centroLayer,
             "Cobertura SameDay": layerGroup,
             "Densidad de entregas Parcel": layerGroup2,
-            "Expansión SameDay": layerGroup3
+            "Expansión SameDay": layerGroup3,
+            "Expansión SameDay 2do bloque": layerGroup4
         };
         L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
         layerGroup2.addTo(map); // Añadida por defecto
